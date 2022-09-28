@@ -29,19 +29,19 @@ class HomeLayout extends StatelessWidget {
             unselectedItemColor: Colors.grey,
             items: const [
               BottomNavigationBarItem(
-                title: Text('Global'),
+                label: 'Global',
                 icon: Icon(
                   Icons.public,
                 ),
               ),
               BottomNavigationBarItem(
-                title: Text('All Countries'),
+                label: 'All Countries',
                 icon: Icon(
                   Icons.menu,
                 ),
               ),
               BottomNavigationBarItem(
-                title: Text('Search'),
+                label: 'Search',
                 icon: Icon(
                   Icons.search,
                 ),

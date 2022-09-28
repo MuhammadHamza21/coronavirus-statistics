@@ -1,9 +1,10 @@
+import 'package:coronavirus_statistics/Models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'cases_number_widget.dart';
 
 class CasesInDetails extends StatelessWidget {
-  final Map<String, dynamic> list;
-  CasesInDetails({
+  final CountryModel list;
+  const CasesInDetails({
     required this.list,
   });
 
@@ -14,37 +15,37 @@ class CasesInDetails extends StatelessWidget {
         children: [
           CasesNumberWidget(
             mainTitle: 'Total Cases',
-            numOfCases: list['cases'],
+            numOfCases: list.cases,
             color: Colors.blueAccent,
           ),
           CasesNumberWidget(
             mainTitle: 'Today Cases',
-            numOfCases: list['todayCases'],
+            numOfCases: list.todayCases,
             color: Colors.blueAccent,
           ),
           CasesNumberWidget(
             mainTitle: 'Active',
-            numOfCases: list['active'],
+            numOfCases: list.active,
             color: Colors.blueAccent,
           ),
           CasesNumberWidget(
             mainTitle: 'Total Recovered',
-            numOfCases: list['recovered'],
+            numOfCases: list.recovered,
             color: Colors.green,
           ),
           CasesNumberWidget(
             mainTitle: 'Today Recovered',
-            numOfCases: list['todayRecovered'],
+            numOfCases: list.todayRecovered,
             color: Colors.green,
           ),
           CasesNumberWidget(
             mainTitle: 'Total Deaths',
-            numOfCases: list['deaths'],
+            numOfCases: list.deaths,
             color: Colors.red,
           ),
           CasesNumberWidget(
             mainTitle: 'Today Deaths',
-            numOfCases: list['todayDeaths'],
+            numOfCases: list.todayDeaths,
             color: Colors.red,
           ),
         ],

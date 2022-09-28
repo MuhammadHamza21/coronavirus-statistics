@@ -12,6 +12,8 @@ class GetAllCountriesDataSucssesState extends CoronavirusStatisticsStates {}
 
 class GetAllCountriesDataLoadingState extends CoronavirusStatisticsStates {}
 
-class GetSearchDataSucssesState extends CoronavirusStatisticsStates {}
+class GetSearchedCountriesDataSucssesState extends CoronavirusStatisticsStates {
+}
 
-class GetSearchDataLoadingState extends CoronavirusStatisticsStates {}
+class GetSearchedCountriesDataLoadingState extends CoronavirusStatisticsStates {
+}

@@ -12,12 +12,25 @@ class AllCountriesScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, CoronavirusStatisticsStates>(
         builder: (context, state) {
           var cubit = AppCubit.get(context);
-          return ListView.builder(
-            itemBuilder: (context, index) {
-              return CountryWidget(country: cubit.allCountriesList[index]);
-            },
-            itemCount: cubit.allCountriesList.length,
-          );
+          return state is GetAllCountriesDataLoadingState
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : cubit.allCountriesList.isEmpty
+                  ? const Center(
+                      child: Center(
+                        child: Text(
+                          'It looks like an error, please try again later!',
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemBuilder: (context, index) {
+                        return CountryWidget(
+                            country: cubit.allCountriesList[index]);
+                      },
+                      itemCount: cubit.allCountriesList.length,
+                    );
         },
         listener: (context, state) {});
   }

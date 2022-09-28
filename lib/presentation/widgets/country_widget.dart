@@ -1,8 +1,9 @@
+import 'package:coronavirus_statistics/Models/country_model.dart';
 import 'package:coronavirus_statistics/presentation/screens/specefic_country_screen.dart';
 import 'package:flutter/material.dart';
 
 class CountryWidget extends StatelessWidget {
-  final Map<String, dynamic> country;
+  final CountryModel country;
   // ignore: use_key_in_widget_constructors
   const CountryWidget({required this.country});
 
@@ -37,7 +38,7 @@ class CountryWidget extends StatelessWidget {
                 height: 50,
                 width: 80,
                 image: NetworkImage(
-                  '${country['countryInfo']['flag']}',
+                  '${country.countryInfo!.flag}',
                 ),
                 fit: BoxFit.cover,
               ),
@@ -49,7 +50,7 @@ class CountryWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    country['country'],
+                    country.country!,
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -57,7 +58,7 @@ class CountryWidget extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    '${country['cases']}',
+                    '${country.cases}',
                     style: const TextStyle(
                       color: Colors.grey,
                     ),

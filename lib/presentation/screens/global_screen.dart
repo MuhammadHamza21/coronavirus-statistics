@@ -12,11 +12,11 @@ class GlobalScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, CoronavirusStatisticsStates>(
       builder: (context, state) {
         var cubit = AppCubit.get(context);
-        return AppCubit.get(context).globalList.isEmpty
-            ? Center(
+        return state is GetGlobalDataLoadingState
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : CasesInDetails(list: cubit.globalList);
+            : CasesInDetails(list: cubit.globalList!);
       },
       listener: (context, state) {},
     );
