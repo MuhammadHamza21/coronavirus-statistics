@@ -34,14 +34,14 @@ class CountryWidget extends StatelessWidget {
               const SizedBox(
                 width: 15,
               ),
-              Image(
-                height: 50,
-                width: 80,
-                image: NetworkImage(
-                  '${country.countryInfo!.flag}',
-                ),
-                fit: BoxFit.cover,
-              ),
+              // Image(
+              //   height: 50,
+              //   width: 80,
+              //   image: NetworkImage(
+              //     '${country.countryInfo!.flag}',
+              //   ),
+              //   fit: BoxFit.cover,
+              // ),
               const SizedBox(
                 width: 20,
               ),

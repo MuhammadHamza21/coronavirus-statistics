@@ -1,52 +1,41 @@
 class CountryModel {
-  int? updated;
-  String? country;
   CountryInfo? countryInfo;
-  int? cases;
-  int? todayCases;
-  int? deaths;
-  int? todayDeaths;
-  int? recovered;
-  int? todayRecovered;
-  int? active;
-  int? critical;
-  int? casesPerOneMillion;
-  int? deathsPerOneMillion;
-  int? tests;
-  int? testsPerOneMillion;
-  int? population;
+  String? country;
   String? continent;
-  int? oneCasePerPeople;
-  int? oneDeathPerPeople;
-  int? oneTestPerPeople;
-  double? activePerOneMillion;
-  double? recoveredPerOneMillion;
-  double? criticalPerOneMillion;
+  dynamic? updated;
+  dynamic? cases;
+  dynamic? todayCases;
+  dynamic? deaths;
+  dynamic? todayDeaths;
+  dynamic? recovered;
+  dynamic? todayRecovered;
+  dynamic? active;
+  dynamic? critical;
+  dynamic? tests;
+  dynamic? population;
+  dynamic? oneCasePerPeople;
+  dynamic? oneDeathPerPeople;
+  dynamic? oneTestPerPeople;
 
-  CountryModel(
-      {this.updated,
-      this.country,
-      this.countryInfo,
-      this.cases,
-      this.todayCases,
-      this.deaths,
-      this.todayDeaths,
-      this.recovered,
-      this.todayRecovered,
-      this.active,
-      this.critical,
-      this.casesPerOneMillion,
-      this.deathsPerOneMillion,
-      this.tests,
-      this.testsPerOneMillion,
-      this.population,
-      this.continent,
-      this.oneCasePerPeople,
-      this.oneDeathPerPeople,
-      this.oneTestPerPeople,
-      this.activePerOneMillion,
-      this.recoveredPerOneMillion,
-      this.criticalPerOneMillion});
+  CountryModel({
+    this.updated,
+    this.country,
+    this.countryInfo,
+    this.cases,
+    this.todayCases,
+    this.deaths,
+    this.todayDeaths,
+    this.recovered,
+    this.todayRecovered,
+    this.active,
+    this.critical,
+    this.tests,
+    this.population,
+    this.continent,
+    this.oneCasePerPeople,
+    this.oneDeathPerPeople,
+    this.oneTestPerPeople,
+  });
 
   CountryModel.fromJson(Map<String, dynamic> json) {
     updated = json['updated'];
@@ -62,18 +51,12 @@ class CountryModel {
     todayRecovered = json['todayRecovered'];
     active = json['active'];
     critical = json['critical'];
-    casesPerOneMillion = json['casesPerOneMillion'];
-    deathsPerOneMillion = json['deathsPerOneMillion'];
     tests = json['tests'];
-    testsPerOneMillion = json['testsPerOneMillion'];
     population = json['population'];
     continent = json['continent'];
     oneCasePerPeople = json['oneCasePerPeople'];
     oneDeathPerPeople = json['oneDeathPerPeople'];
     oneTestPerPeople = json['oneTestPerPeople'];
-    activePerOneMillion = json['activePerOneMillion'];
-    recoveredPerOneMillion = json['recoveredPerOneMillion'];
-    criticalPerOneMillion = json['criticalPerOneMillion'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,28 +74,22 @@ class CountryModel {
     data['todayRecovered'] = todayRecovered;
     data['active'] = active;
     data['critical'] = critical;
-    data['casesPerOneMillion'] = casesPerOneMillion;
-    data['deathsPerOneMillion'] = deathsPerOneMillion;
     data['tests'] = tests;
-    data['testsPerOneMillion'] = testsPerOneMillion;
     data['population'] = population;
     data['continent'] = continent;
     data['oneCasePerPeople'] = oneCasePerPeople;
     data['oneDeathPerPeople'] = oneDeathPerPeople;
     data['oneTestPerPeople'] = oneTestPerPeople;
-    data['activePerOneMillion'] = activePerOneMillion;
-    data['recoveredPerOneMillion'] = recoveredPerOneMillion;
-    data['criticalPerOneMillion'] = criticalPerOneMillion;
     return data;
   }
 }
 
 class CountryInfo {
-  int? iId;
+  dynamic? iId;
   String? iso2;
   String? iso3;
-  int? lat;
-  int? long;
+  dynamic? lat;
+  dynamic? long;
   String? flag;
 
   CountryInfo({this.iId, this.iso2, this.iso3, this.lat, this.long, this.flag});

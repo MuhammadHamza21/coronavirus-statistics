@@ -1,4 +1,5 @@
 import 'package:coronavirus_statistics/Models/country_model.dart';
+import 'package:coronavirus_statistics/Models/global_model.dart';
 import 'package:coronavirus_statistics/bloc/cubit/states.dart';
 import 'package:coronavirus_statistics/network/dio_helper.dart';
 import 'package:coronavirus_statistics/presentation/screens/all_countries_screen.dart';
@@ -11,15 +12,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppCubit extends Cubit<CoronavirusStatisticsStates> {
   AppCubit() : super(AppInitialState());
   static AppCubit get(context) => BlocProvider.of(context);
-  CountryModel? globalList;
+  GlobalModel? globalData;
   List<CountryModel> allCountriesList = [];
   List<CountryModel> searchedCountriesList = [];
-  Map<String, dynamic> searchedCountry = {};
   int currentIndex = 0;
-  List<Widget> screens = const [
-    GlobalScreen(),
-    AllCountriesScreen(),
-    SearchScreen(),
+  List<Widget> screens = [
+    const GlobalScreen(),
+    const AllCountriesScreen(),
+    const SearchScreen(),
   ];
   List<String> titles = [
     'Global',
@@ -36,52 +36,54 @@ class AppCubit extends Cubit<CoronavirusStatisticsStates> {
     DioHelper.getData(
       url: global,
     ).then((value) {
-      print(value.data);
-      globalList = CountryModel.fromJson(value.data);
+      globalData = GlobalModel.fromJson(value.data);
       emit(GetGlobalDataSucssesState());
-      print('List is $globalList');
     }).catchError((onError) {
       print('Error while fitching data/////${onError.toString()}');
+      emit(GetGlobalDataErrorState(errorMessage: onError.toString()));
     });
   }
 
-  void getAllCountriesData() {
+  Future getAllCountriesData() async {
     allCountriesList = [];
     emit(GetAllCountriesDataLoadingState());
-    DioHelper.getData(
+    await DioHelper.getData(
       url: allCountries,
     ).then((value) {
       for (var i = 0; i < value.data.length; i++) {
-        allCountriesList.add(CountryModel.fromJson(value.data));
+        allCountriesList.add(CountryModel.fromJson(value.data[i]));
       }
-      print(allCountriesList.toString());
       emit(GetAllCountriesDataSucssesState());
     }).catchError((onError) {
-      print('Error while fitching data/////${onError.toString()}');
+      emit(GetAllCountriesDataErrorState(errorMessage: onError.toString()));
+      print(
+          'Error while fitching data in all countries/////${onError.toString()}');
     });
   }
 
-  // void getSpecificCountryData({required String iso}) {
-  //   emit(GetSearchDataLoadingState());
-  //   DioHelper.getData(
-  //     url: '${allCountries}${iso}',
-  //   ).then((value) {
-  //     searchedCountry = {};
-  //     searchedCountry = value.data;
-  //     emit(GetSearchDataSucssesState());
-  //   }).catchError((onError) {
-  //     print('Error while fitching data/////${onError.toString()}');
-  //   });
-  // }
-
-  void getSearchedCountriesData({required String iso}) {
+  void getSearchedCountriesData({required String iso}) async {
+    searchedCountriesList = [];
     emit(GetSearchedCountriesDataLoadingState());
-    searchedCountriesList = allCountriesList
-        .where((element) =>
-            element.country!.toLowerCase().contains(iso) ||
-            element.countryInfo!.iso2!.toLowerCase().contains(iso) ||
-            element.countryInfo!.iso3!.toLowerCase().contains(iso))
-        .toList();
-    emit(GetSearchedCountriesDataSucssesState());
+    if (allCountriesList.isEmpty) {
+      await getAllCountriesData();
+      if (allCountriesList.isNotEmpty) {
+        searchedCountriesList = allCountriesList
+            .where((element) => element.country!.toLowerCase().contains(iso))
+            .toList();
+        emit(GetSearchedCountriesDataSucssesState());
+      } else {
+        emit(GetSearchedCountriesDataErrorState());
+      }
+    } else {
+      searchedCountriesList = allCountriesList
+          .where((element) => element.country!.toLowerCase().contains(iso))
+          .toList();
+      emit(GetSearchedCountriesDataSucssesState());
+    }
+  }
+
+  void emptySearchedCountriesList() {
+    searchedCountriesList = [];
+    emit(EmptySearchedCountriesList());
   }
 }

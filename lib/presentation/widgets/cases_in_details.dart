@@ -1,51 +1,58 @@
 import 'package:coronavirus_statistics/Models/country_model.dart';
+import 'package:coronavirus_statistics/Models/global_model.dart';
 import 'package:flutter/material.dart';
 import 'cases_number_widget.dart';
 
 class CasesInDetails extends StatelessWidget {
-  final CountryModel list;
+  final CountryModel? list;
+  final GlobalModel? global;
   const CasesInDetails({
-    required this.list,
+    this.list,
+    this.global,
   });
 
   @override
   Widget build(BuildContext context) {
+    return _casesInDetails(list ?? global);
+  }
+
+  Widget _casesInDetails(dynamic object) {
     return SingleChildScrollView(
       child: Column(
         children: [
           CasesNumberWidget(
             mainTitle: 'Total Cases',
-            numOfCases: list.cases,
+            numOfCases: object.cases,
             color: Colors.blueAccent,
           ),
           CasesNumberWidget(
             mainTitle: 'Today Cases',
-            numOfCases: list.todayCases,
+            numOfCases: object.todayCases,
             color: Colors.blueAccent,
           ),
           CasesNumberWidget(
             mainTitle: 'Active',
-            numOfCases: list.active,
+            numOfCases: object.active,
             color: Colors.blueAccent,
           ),
           CasesNumberWidget(
             mainTitle: 'Total Recovered',
-            numOfCases: list.recovered,
+            numOfCases: object.recovered,
             color: Colors.green,
           ),
           CasesNumberWidget(
             mainTitle: 'Today Recovered',
-            numOfCases: list.todayRecovered,
+            numOfCases: object.todayRecovered,
             color: Colors.green,
           ),
           CasesNumberWidget(
             mainTitle: 'Total Deaths',
-            numOfCases: list.deaths,
+            numOfCases: object.deaths,
             color: Colors.red,
           ),
           CasesNumberWidget(
             mainTitle: 'Today Deaths',
-            numOfCases: list.todayDeaths,
+            numOfCases: object.todayDeaths,
             color: Colors.red,
           ),
         ],
